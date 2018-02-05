@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">VisualArtsNotebook</string>
+    <string name="createAccount"><u>Create Your Account</u></string>
+    <string name="getLoginInfo"><u>Send A Retrieval Email</u></string>
+    <string name="enterKey"><u>Enter Your Key Here:</u></string>
+    <string name="managePic"><u>Manage Photos</u></string>
+    <string name="mailInstruct">Your account has been found! Click the Send Email button to send
+    an email containing your username and password to the email you have associated with this account.
+    Of course, you\'ll see your before you send the email, but sending it is advised to ensure you can
+    easily access it should you lose it again.</string>
+    <string name="artbookIns">There are 2 artbooks that make up The Visual Arts Notebook. The first one
+    is the Private Journal which anyone can use anytime. The other is the Portfolio. But in use it, you
+    have to be registered as an Student, Teacher, or Administrator.</string>
+    <string name="title_activity_manage_photos">ManagePhotos</string>
+</resources>

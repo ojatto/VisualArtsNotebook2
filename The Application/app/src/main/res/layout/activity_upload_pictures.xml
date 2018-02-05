@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.visualartsnotebook.UploadPictures">
+
+    <TextView
+        android:id="@+id/libraryText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Get from Device"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/cameraRoll"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ImageButton
+        android:id="@+id/cameraRoll"
+        android:layout_width="0dp"
+        android:layout_height="174dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:srcCompat="@drawable/photoalbum"
+        app:layout_constraintBottom_toTopOf="@+id/cameraText"
+        app:layout_constraintTop_toBottomOf="@+id/libraryText" />
+
+    <TextView
+        android:id="@+id/cameraText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Take a Picture"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/cameraButton"
+        app:layout_constraintTop_toBottomOf="@+id/cameraRoll" />
+
+    <ImageButton
+        android:id="@+id/cameraButton"
+        android:layout_width="0dp"
+        android:layout_height="183dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:srcCompat="@drawable/cutecamera"
+        app:layout_constraintBottom_toTopOf="@+id/backButton3"
+        app:layout_constraintTop_toBottomOf="@+id/cameraText" />
+
+    <Button
+        android:id="@+id/backButton3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:onClick="goBackPost"
+        android:text="Back to Main Menu"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cameraButton" />
+
+</android.support.constraint.ConstraintLayout>

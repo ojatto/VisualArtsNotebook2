@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.visualartsnotebook.ChoosePrivateCanvas">
+
+    <TextView
+        android:id="@+id/chooseCanvas"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Let's Get Started:"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="20dp"/>
+
+    <Button
+        android:id="@+id/newBlankProject"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="New Blank Project"
+        android:onClick="newBlank"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/newPictureProject"
+        app:layout_constraintTop_toBottomOf="@+id/chooseCanvas" />
+
+    <Button
+        android:id="@+id/newPictureProject"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="New Project With a Photo"
+        android:onClick="newPicture"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/oldPrivateProject"
+        app:layout_constraintTop_toBottomOf="@+id/newBlankProject" />
+
+    <Button
+        android:id="@+id/oldPrivateProject"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Existing Art Project"
+        android:onClick="oldProject"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/backButton8"
+        app:layout_constraintTop_toBottomOf="@+id/newPictureProject" />
+
+    <Button
+        android:id="@+id/backButton8"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Back"
+        android:onClick="backArtbook"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/oldPrivateProject" />
+
+
+</android.support.constraint.ConstraintLayout>

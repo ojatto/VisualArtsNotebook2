@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.example.visualartsnotebook">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme">
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".AdministratorCourses" />
+        <activity android:name=".AnswerQuestion" />
+        <activity android:name=".ChooseArtbook" />
+        <activity android:name=".ChoosePicture" />
+        <activity android:name=".ChoosePictureTwo" />
+        <activity android:name=".ChoosePortfolioCanvas" />
+        <activity android:name=".ChoosePrivateCanvas" />
+        <activity android:name=".ChoosePrivateProject" />
+        <activity android:name=".DeletePhotos" />
+        <activity android:name=".EmailLoginActivity" />
+        <activity android:name=".EnterKey" />
+        <activity android:name=".ForgotLogin" />
+        <activity android:name=".MakeCourses" />
+        <activity android:name=".ManageClasses" />
+        <activity android:name=".ManagePhotos" />
+        <activity android:name=".PostLoginMenu" />
+        <activity android:name=".PrivateJournal" />
+        <activity android:name=".RedeemKey" />
+        <activity android:name=".Register" />
+        <activity android:name=".StudentCourses" />
+        <activity android:name=".StudentKeys" />
+        <activity android:name=".TaughtCourses" />
+        <activity android:name=".TeacherCourses" />
+        <activity android:name=".UpdateAccount" />
+        <activity android:name=".UploadPictures" />
+        <activity android:name=".ViewPhotos" />
+        <activity android:name=".ViewExhibits"></activity>
+    </application>
+
+</manifest>

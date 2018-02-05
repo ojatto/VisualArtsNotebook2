@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.visualartsnotebook.ManagePhotos">
+
+    <TextView
+        android:id="@+id/managePhotos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/managePic"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="20dp" />
+
+    <Button
+        android:id="@+id/uploadPic"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Upload Pictures"
+        android:onClick="uploadPhoto"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/deletePic"
+        app:layout_constraintTop_toBottomOf="@+id/managePhotos" />
+
+    <Button
+        android:id="@+id/deletePic"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Delete Pictures"
+        android:onClick="deletePhoto"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/viewPic"
+        app:layout_constraintTop_toBottomOf="@+id/uploadPic" />
+
+    <Button
+        android:id="@+id/viewPic"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="View Pictures"
+        android:onClick="viewPhotos"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/backToPost2"
+        app:layout_constraintTop_toBottomOf="@+id/deletePic" />
+
+    <Button
+        android:id="@+id/backToPost2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Back"
+        android:onClick="goHome2"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/viewPic" />
+
+</android.support.constraint.ConstraintLayout>

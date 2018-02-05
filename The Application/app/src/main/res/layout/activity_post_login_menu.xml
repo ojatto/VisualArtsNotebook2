@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.visualartsnotebook.PostLoginMenu">
+
+    <TextView
+        android:id="@+id/welcomeUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="20dp" />
+
+    <Button
+        android:id="@+id/manageButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Manage Account"
+        android:onClick="updateInfo"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/welcomeUser"
+        app:layout_constraintRight_toLeftOf="@+id/logoutButton"
+        android:layout_marginTop="16dp" />
+
+    <Button
+        android:id="@+id/logoutButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Log Out"
+        android:onClick="logOut"
+        app:layout_constraintTop_toBottomOf="@+id/welcomeUser"
+        app:layout_constraintLeft_toRightOf="@+id/manageButton"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginTop="16dp" />
+
+    <Button
+        android:id="@+id/enterArtbook"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Enter an Artbook"
+        android:onClick="chooseBook"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintBottom_toTopOf="@+id/managePhotos"
+        app:layout_constraintTop_toBottomOf="@+id/manageButton" />
+
+    <Button
+        android:id="@+id/managePhotos"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Manage Photos"
+        android:onClick="managePhotos"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/manageClasses"
+        app:layout_constraintTop_toBottomOf="@+id/enterArtbook"
+        app:layout_constraintHorizontal_bias="0.0" />
+
+    <Button
+        android:id="@+id/manageClasses"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Manage Classes"
+        android:onClick="manageClass"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintTop_toBottomOf="@+id/managePhotos"
+        app:layout_constraintBottom_toTopOf="@+id/viewExhibit" />
+
+    <Button
+        android:id="@+id/viewExhibit"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="View Galleries"
+        android:onClick="viewExhibit"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/manageClasses"
+        app:layout_constraintHorizontal_bias="1.0" />
+
+</android.support.constraint.ConstraintLayout>

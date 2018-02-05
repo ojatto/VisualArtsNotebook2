@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.visualartsnotebook.ChooseArtbook">
+
+    <TextView
+        android:id="@+id/chooseArtbook"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Choose an Artbook"
+        android:textAppearance="@style/TextAppearance.AppCompat.Display1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/artInstructions" />
+
+    <TextView
+        android:id="@+id/artInstructions"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/artbookIns"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/chooseArtbook"
+        tools:textColor="@android:drawable/alert_dark_frame"
+        tools:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/privateJournal" />
+
+    <Button
+        android:id="@+id/privateJournal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Private Journal"
+        android:onClick="thePrivateJournal"
+        app:layout_constraintBottom_toTopOf="@+id/thePortfolio"
+        app:layout_constraintTop_toBottomOf="@+id/artInstructions"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent" />
+
+    <Button
+        android:id="@+id/thePortfolio"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="Portfolio"
+        android:onClick="toThePortfolio"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/backButton7"
+        app:layout_constraintTop_toBottomOf="@+id/privateJournal" />
+
+    <Button
+        android:id="@+id/backButton7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Back"
+        android:onClick="goBack"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/thePortfolio" />
+
+</android.support.constraint.ConstraintLayout>
