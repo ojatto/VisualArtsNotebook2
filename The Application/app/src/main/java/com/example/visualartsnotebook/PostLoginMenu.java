@@ -77,14 +77,14 @@ public class PostLoginMenu extends AppCompatActivity {
     }
 
     /**
-     * This method takes the user to a menu to change their account information
+     * This method takes the user to a menu to where they can view their account information
      * @param view
      */
-    public void updateInfo(View view)
+    public void manageAccount(View view)
     {
-        Intent intent = new Intent(this, UpdateAccount.class);
-        intent.putExtra("username", username);
-        startActivity(intent);
+        String type = "account";
+        ValidateUser process = new ValidateUser(this);
+        process.execute(type,username);
     }
 
     /**

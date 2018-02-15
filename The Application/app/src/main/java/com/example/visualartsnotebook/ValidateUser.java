@@ -72,6 +72,7 @@ public class ValidateUser extends AsyncTask<String, Void, String>
         String verifyLoginURL = "http://kersleyojatto.com/projects/visualartsnotebook2/verifyLogin.php";
         String checkEmailURL = "http://kersleyojatto.com/projects/visualartsnotebook2/checkEmail.php";
         String findLoginURL = "http://kersleyojatto.com/projects/visualartsnotebook2/findLogin.php";
+        String yourInfoURL = "http://kersleyojatto.com/projects/visualartsnotebook2/yourInfo.php";
 
         if(type.equals("register"))
         {
@@ -255,6 +256,57 @@ public class ValidateUser extends AsyncTask<String, Void, String>
             catch(IOException e){
                 e.printStackTrace();
             }
+        }
+        else if(type.equalsIgnoreCase("account"))
+        {
+            //If type equals "account" we must present the user with their information.
+            try
+            {
+                String username = params[1];
+
+                URL url = new URL(yourInfoURL);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                String postData = URLEncoder.encode("Username", "UTF-8")+"="+URLEncoder.encode(username, "UTF-8");
+                bufferedWriter.write(postData);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader((new InputStreamReader(inputStream, "iso-8859-1")));
+
+                String line = "";
+                String result = "";
+                while((line = bufferedReader.readLine()) != null){
+                    result = result+line;
+                }
+
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                setActionToPerform(result);
+                Log.d("Error:", "Result: " + result);
+                return result;
+
+            }
+            catch(MalformedURLException e){
+                e.printStackTrace();
+            }
+            catch(IOException e){
+                e.printStackTrace();
+            }
+        }
+        else if(type.equalsIgnoreCase("update"))
+        {
+
+        }
+        else if(type.equalsIgnoreCase("delete"))
+        {
+
         }
         return null;
     }
@@ -496,9 +548,60 @@ public class ValidateUser extends AsyncTask<String, Void, String>
                 alertDialog.show();
             }
         }
+        else if(type.equalsIgnoreCase("account"))
+        {
+            //If type equals "account" this means the user wants to view the account information so we parse the tuple
+            //from the database and give it to UserAccountIInfo to display.
+            if(!actionToPerform.equalsIgnoreCase("Not Found"))
+            {
+                String username = "";
+                String password = "";
+                String email = "";
+                String birthyear = "";
+                String squestion = "";
+                String answer = "";
+
+                try
+                {
+                    //Now we make a JSON to decode the row tuple sent from the PHP.
+                    JSONArray jsonArray = new JSONArray(result);
+
+                    //This array list will store the user tuple.
+                    ArrayList<String> list = new ArrayList<String>();
+                    for (int i = 0; i < jsonArray.length(); i++) {
+                        list.add(jsonArray.getString(i));
+                    }
+                    //Get the user's username, email, password, birth year, security question, and answer
+                    username = list.get(1);
+                    password = list.get(4);
+                    email = list.get(3);
+                    birthyear = list.get(2);
+                    squestion = list.get(5);
+                    answer = list.get(6);
+                }
+                catch(Exception e)
+                {
+                    e.printStackTrace();
+                }
+
+                //With the user information retreived, we can now initiate UserAccountInfo and instantiate the XML fields with the information.
+                Intent infoActivity = new Intent(context, UserAccountInfo.class);
+                infoActivity.putExtra("username",username);
+                infoActivity.putExtra("password", password);
+                infoActivity.putExtra("email",email);
+                infoActivity.putExtra("birthyear",birthyear);
+                infoActivity.putExtra("squestion",squestion);
+                infoActivity.putExtra("answer",answer);
+                context.startActivity(infoActivity);
+            }
+        }
         else if(type.equalsIgnoreCase("update"))
         {
             //If type equals "update" this means the user wants to update their account information.
+        }
+        else if(type.equalsIgnoreCase("delete"))
+        {
+            //If type equals "delete" this means the user wants to delete their account information.
         }
     }
 

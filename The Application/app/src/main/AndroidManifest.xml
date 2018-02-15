@@ -46,7 +46,9 @@
         <activity android:name=".UpdateAccount" />
         <activity android:name=".UploadPictures" />
         <activity android:name=".ViewPhotos" />
-        <activity android:name=".ViewExhibits"></activity>
+        <activity android:name=".ViewExhibits" />
+        <activity android:name=".UserAccountInfo" />
+        <activity android:name=".DeleteAccount"></activity>
     </application>
 
 </manifest>

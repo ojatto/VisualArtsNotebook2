@@ -12,4 +12,5 @@
     is the Private Journal which anyone can use anytime. The other is the Portfolio. But in use it, you
     have to be registered as an Student, Teacher, or Administrator.</string>
     <string name="title_activity_manage_photos">ManagePhotos</string>
+    <string name="yourInfo">Your User Information:</string>
 </resources>
