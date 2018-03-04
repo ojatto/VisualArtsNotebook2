@@ -13,4 +13,7 @@
     have to be registered as an Student, Teacher, or Administrator.</string>
     <string name="title_activity_manage_photos">ManagePhotos</string>
     <string name="yourInfo">Your User Information:</string>
+    <string name="editAccount"><u>Make Your Changes:</u></string>
+    <string name="updateFields"><b>To update your account information, simply click the Update Button next to corresponding
+    field that you wish to update. A box will then appear, allowing to enter a new value for your account. </b></string>
 </resources>

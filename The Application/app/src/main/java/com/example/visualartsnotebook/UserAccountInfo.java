@@ -1,6 +1,4 @@
 package com.example.visualartsnotebook;
-
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -40,11 +38,6 @@ public class UserAccountInfo extends AppCompatActivity {
      * The holds the answer to the question
      */
     private String theAnswer;
-
-    /**
-     * This variable will be used to print prompts to the user.
-     */
-    private AlertDialog inputError;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,7 +96,7 @@ public class UserAccountInfo extends AppCompatActivity {
     /**
      * Click this mehtod takes the user to an activity that lets them delete their account as well as all associated pictures,
      * art, and courses they've created.
-     * @param view
+     * @param view View for the Delete Account button
      */
     public void deleteYourAccount(View view)
     {
@@ -114,7 +107,7 @@ public class UserAccountInfo extends AppCompatActivity {
 
     /**
      * Returns to Post Login Menu.
-     * @param view
+     * @param view View for the Back Button
      */
     public void returnToPostLogin(View view)
     {

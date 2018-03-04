@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 
@@ -49,6 +50,19 @@ public class ValidateUser extends AsyncTask<String, Void, String>
      * This holds the username and allows it to be easily sent via intents
      */
     private String username;
+
+    /**
+     * This is a reference to the value given by the user
+     */
+    private String newValue;
+
+    private String oldUsername;
+    private String oldEmail;
+    private String oldPassword;
+    private String oldBirthYear;
+    private String oldQuestion;
+    private String oldAnswer;
+
     /**
      * This is the constructor for the Constructor class
      * @param con
@@ -73,6 +87,7 @@ public class ValidateUser extends AsyncTask<String, Void, String>
         String checkEmailURL = "http://kersleyojatto.com/projects/visualartsnotebook2/checkEmail.php";
         String findLoginURL = "http://kersleyojatto.com/projects/visualartsnotebook2/findLogin.php";
         String yourInfoURL = "http://kersleyojatto.com/projects/visualartsnotebook2/yourInfo.php";
+        String updateInfoURL = "http://kersleyojatto.com/projects/visualartsnotebook2/updateInfo.php";
 
         if(type.equals("register"))
         {
@@ -302,7 +317,60 @@ public class ValidateUser extends AsyncTask<String, Void, String>
         }
         else if(type.equalsIgnoreCase("update"))
         {
+            //If type equals "update" this means the user wants to update their account information.
 
+            try
+            {
+                String username = params[1];
+                String updateField = params[2];
+                newValue = params[3];
+
+                //Instantiate the old~ variables here so that we can refresh the activity easily later.
+                oldUsername = params[4];
+                oldEmail = params[5];
+                oldPassword = params[6];
+                oldBirthYear = params[7];
+                oldQuestion = params[8];
+                oldAnswer = params[9];
+
+                //Make the connection
+                URL url = new URL(updateInfoURL);
+                HttpURLConnection httpURLConnection = (HttpURLConnection) url.openConnection();
+                httpURLConnection.setRequestMethod("POST");
+                httpURLConnection.setDoOutput(true);
+                httpURLConnection.setDoInput(true);
+                OutputStream outputStream = httpURLConnection.getOutputStream();
+                BufferedWriter bufferedWriter = new BufferedWriter(new OutputStreamWriter(outputStream, "UTF-8"));
+                String postData = URLEncoder.encode("Username", "UTF-8")+"="+URLEncoder.encode(username, "UTF-8")+"&"
+                        + URLEncoder.encode("Field", "UTF-8")+"="+URLEncoder.encode(updateField, "UTF-8")+"&"
+                        + URLEncoder.encode("NewValue", "UTF-8")+"="+URLEncoder.encode(newValue, "UTF-8");
+                bufferedWriter.write(postData);
+                bufferedWriter.flush();
+                bufferedWriter.close();
+                outputStream.close();
+                InputStream inputStream = httpURLConnection.getInputStream();
+                BufferedReader bufferedReader = new BufferedReader((new InputStreamReader(inputStream, "iso-8859-1")));
+
+                String line = "";
+                String result = "";
+                while((line = bufferedReader.readLine()) != null){
+                    result = result+line;
+                }
+
+                bufferedReader.close();
+                inputStream.close();
+                httpURLConnection.disconnect();
+                setActionToPerform(result);
+                Log.d("Error:", "Result: " + result);
+                return result;
+
+            }
+            catch(MalformedURLException e){
+                e.printStackTrace();
+            }
+            catch(IOException e){
+                e.printStackTrace();
+            }
         }
         else if(type.equalsIgnoreCase("delete"))
         {
@@ -597,7 +665,174 @@ public class ValidateUser extends AsyncTask<String, Void, String>
         }
         else if(type.equalsIgnoreCase("update"))
         {
-            //If type equals "update" this means the user wants to update their account information.
+            if(actionToPerform.equalsIgnoreCase("Username update successful"))
+            {
+                alertDialog.setMessage("Your username has been succesfully updated.");
+                alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                        //We use the old variables containing the pre-update information to relaunch the User Account info activity with the new
+                        // information.
+
+                        Intent infoActivity = new Intent(context, UpdateAccount.class);
+                        infoActivity.putExtra("username", newValue); //Since username was updated, we use newValue instead.
+                        infoActivity.putExtra("password", oldPassword);
+                        infoActivity.putExtra("email",oldEmail);
+                        infoActivity.putExtra("birthyear",oldBirthYear);
+                        infoActivity.putExtra("squestion",oldQuestion);
+                        infoActivity.putExtra("answer",oldAnswer);
+                        context.startActivity(infoActivity);
+                    }
+                });
+                alertDialog.show();
+            }
+            else if(actionToPerform.equalsIgnoreCase("Username taken"))
+            {
+                alertDialog.setMessage("This username is already in use. Please try a different one.");
+                alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        alertDialog.dismiss();
+                    }
+                });
+                alertDialog.show();
+            }
+            else if(actionToPerform.equalsIgnoreCase("Email update successful"))
+            {
+                alertDialog.setMessage("Your email has been succesfully updated.");
+                alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                        //We use the old variables containing the pre-update information to relaunch the User Account info activity with the new
+                        // information.
+
+                        Intent infoActivity = new Intent(context, UpdateAccount.class);
+                        infoActivity.putExtra("username", oldUsername);
+                        infoActivity.putExtra("password", oldPassword);
+                        infoActivity.putExtra("email",newValue); //Since email was updated, we use newValue instead.
+                        infoActivity.putExtra("birthyear",oldBirthYear);
+                        infoActivity.putExtra("squestion",oldQuestion);
+                        infoActivity.putExtra("answer",oldAnswer);
+                        context.startActivity(infoActivity);
+                    }
+                });
+                alertDialog.show();
+            }
+            else if(actionToPerform.equalsIgnoreCase("Email taken"))
+            {
+                alertDialog.setMessage("This email is already in use. Please try a different one.");
+                alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        alertDialog.dismiss();
+                    }
+                });
+                alertDialog.show();
+            }
+            else if(actionToPerform.equalsIgnoreCase("Password Update successful"))
+            {
+                alertDialog.setMessage("Your password has been succesfully updated.");
+                alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                        //We use the old variables containing the pre-update information to relaunch the User Account info activity with the new
+                        // information.
+
+                        Intent infoActivity = new Intent(context, UpdateAccount.class);
+                        infoActivity.putExtra("username", oldUsername);
+                        infoActivity.putExtra("password", newValue); //Since password was updated, we use newValue instead.
+                        infoActivity.putExtra("email",oldEmail);
+                        infoActivity.putExtra("birthyear",oldBirthYear);
+                        infoActivity.putExtra("squestion",oldQuestion);
+                        infoActivity.putExtra("answer",oldAnswer);
+                        context.startActivity(infoActivity);
+                    }
+                });
+                alertDialog.show();
+            }
+            else if(actionToPerform.equalsIgnoreCase("Birth Year Update successful"))
+            {
+                alertDialog.setMessage("Your birth year has been succesfully updated.");
+                alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                        //We use the old variables containing the pre-update information to relaunch the User Account info activity with the new
+                        // information.
+
+                        Intent infoActivity = new Intent(context, UpdateAccount.class);
+                        infoActivity.putExtra("username", oldUsername);
+                        infoActivity.putExtra("password", oldPassword);
+                        infoActivity.putExtra("email",oldEmail);
+                        infoActivity.putExtra("birthyear",newValue); //Since birth year was updated, we use newValue instead.
+                        infoActivity.putExtra("squestion",oldQuestion);
+                        infoActivity.putExtra("answer",oldAnswer);
+                        context.startActivity(infoActivity);
+                    }
+                });
+                alertDialog.show();
+            }
+            else if(actionToPerform.equalsIgnoreCase("Security Question update successful"))
+            {
+                alertDialog.setMessage("Your security question has been succesfully updated.");
+                alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                        //We use the old variables containing the pre-update information to relaunch the User Account info activity with the new
+                        // information.
+
+                        Intent infoActivity = new Intent(context, UpdateAccount.class);
+                        infoActivity.putExtra("username", oldUsername);
+                        infoActivity.putExtra("password", oldPassword);
+                        infoActivity.putExtra("email",oldEmail);
+                        infoActivity.putExtra("birthyear",oldBirthYear);
+                        infoActivity.putExtra("squestion",newValue);//Since the question was updated, we use newValue instead.
+                        infoActivity.putExtra("answer",oldAnswer);
+                        context.startActivity(infoActivity);
+                    }
+                });
+                alertDialog.show();
+            }
+            else if(actionToPerform.equalsIgnoreCase("Answer update successful"))
+            {
+                alertDialog.setMessage("Your security answer has been succesfully updated.");
+                alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                        //We use the old variables containing the pre-update information to relaunch the User Account info activity with the new
+                        // information.
+
+                        Intent infoActivity = new Intent(context, UpdateAccount.class);
+                        infoActivity.putExtra("username", oldUsername);
+                        infoActivity.putExtra("password", oldPassword);
+                        infoActivity.putExtra("email",oldEmail);
+                        infoActivity.putExtra("birthyear",oldBirthYear);
+                        infoActivity.putExtra("squestion",oldQuestion);
+                        infoActivity.putExtra("answer",newValue);//Since the answer was updated, we use newValue instead.
+                        context.startActivity(infoActivity);
+                    }
+                });
+                alertDialog.show();
+            }
+            else
+            {
+                Log.d("Error:", "Action: " + actionToPerform);
+                //This is a blanket message for unforeseen issues
+                Log.d("Unknown Error-->",result);
+                alertDialog.setMessage("There was an error with updating your account...");
+                alertDialog.setButton(DialogInterface.BUTTON_POSITIVE, "OK", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        alertDialog.dismiss();
+                    }
+                });
+                alertDialog.show();
+            }
         }
         else if(type.equalsIgnoreCase("delete"))
         {
